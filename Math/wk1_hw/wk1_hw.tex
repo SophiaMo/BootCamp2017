@@ -1,0 +1,207 @@
+ \documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}
+
+\begin{document}
+
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+
+\title{Homework 1}%replace X with the appropriate number
+\author{Sophia Mo\\ %replace with your name
+OSM Lab--Math} %if necessary, replace with your course title
+
+\maketitle
+
+\begin{problem}{1(3.6)}\hfill\linebreak
+Since $\{B_i\}_{i\in I}$ is a partition of $\Omega$, $\cup_{i\in I}B_i=\Omega$\\
+$A\cap B_i, A\cap B_j, \forall i,j\in I$ are disjoint,\\
+so by finite additivity, we know\\
+$\sum_{i\in I}P(A\cap B_i)=P(\cup_{i\in I}\{A\cap B_i\})=P(A\cap\{\cup_{i\in I}B_i\})$\\
+$\Rightarrow \sum_{i\in I}P(A\cap B_i)=P(A\cap \Omega)=P(A)$, since $A\subset \Omega$
+\end{problem}
+
+\begin{problem}{1(3.8)}\hfill\linebreak
+Since $\{E_1, E_2,...,E_n\}$ is a collection of disjoint events,\\
+$E_1^c, E_2^c,...E_n^c$ are disjoint, and $\{\cup_{k=1}^nE_k\}^c=\cap_{k=1}^n{E_k^c}$\\
+So $P(\cup_{k=1}^nE_k)=1-P(\{\cup_{k=1}^nE_k\}^c)=1-P(\cap_{k=1}^n{E_k^c})=1-\Pi_{k=1}^nP(E_k^c)=1-\Pi_{k=1}^n(1-P(E_k))$
+\end{problem}
+
+\begin{problem}{1(3.11)}\hfill\linebreak
+By Bayes's Rule, $P(\text{s=crime}|\text{s tested +})=\frac{P(\text{s tested +}| \text{s=crime})\times P(\text{s=crime})}{P(\text{s tested +})}$\\
+$=\frac{1\times (1/250,000,000)}{1\times (1/250,000,000)+(1/3,000,000)\times (1-1/250,000,000)}=0.0119$
+\end{problem}
+
+\begin{problem}{1(3.12)}\hfill\linebreak
+Without loss of generality, assume that the door chosen is door 1, and the door opened is door 2. Denote the event that door 1 has car by A, the event that it is shown that door 2 has goat by B, and the event that door 3 has goat by C. By Bayes' rule,\\
+$P(A|B)=\frac{P(B|A)\times P(A)}{P(B)}=\frac{(1/2)\times (1/3)}{(1/3)\times(1/2)+(1/3)\times 0+ (1/3)\times 1}=\frac{1}{3}$\\
+$P(C|B)=\frac{2}{3}$\\
+So it is better to switch to the other door.\\
+When there are 10 doors, assume that the door chose is 1, and the doors opened are doors 2-9, then\\
+$P(\text{1 has car} | \text{door 2-9 has been chosen by Monty})=\frac{(1/9) \times (1/10)}{(1/10)\times (1/9)+8\times (1/10)\times (1/9)}=\frac{1}{10}$\\
+$P(\text{door 10, the unchosen door, has car}|\text{door 2-9 has been chosen by Monty})=\frac{9}{10}$
+\end{problem}
+
+\begin{problem}{1(3.16)}\hfill\linebreak
+Var[$X$]=$E[(X-\mu)^2]=E[X^2-2X\mu+\mu^2]=E[X^2]-2\mu E[X]+\mu^2$, by linearity of expectation\\
+Since $E[X]=\mu$, Var[$X$]=$E[X^2]-2\mu^2+\mu^2=E[X^2]-\mu^2$
+\end{problem}
+
+\begin{problem}{1(3.33)}\hfill\linebreak
+For binomial distribution, $E[B]=np, Var[B]=np(1-p)$\\
+Let the random variable $Y_n=\frac{B}{n}$, then $E[Y_n]=\frac{1}{n}E[B]=p, Var[Y_n]=\frac{1}{n^2}Var[B]=\frac{p(1-p)}{n}$\\
+By Chebyshev's inequality, for a random variable X, $P(|X-E[X]|\geq \epsilon)\leq \frac{Var[X]}{\epsilon^2}$\\
+$\Rightarrow P(|\frac{B}{n}-p|\geq \epsilon)\leq \frac{p(1-p)}{n\epsilon^2}$
+\end{problem}
+
+\begin{problem}{1(3.36)}\hfill\linebreak
+By Central Limit Theorem, we know $\frac{S-np}{\sqrt{np(1-p)}}\rightarrow N(0,1)$\\
+$Z_{5500}=\frac{5500-5000}{\sqrt{6242\times 0.801\times (1-0.801)}}=15.8513$\\
+$\Rightarrow P(S>5500)\approx 0$
+\end{problem}
+
+\begin{problem}{2(a)}\hfill\linebreak
+Suppose we toss 3 coins. Let A be the event that coin 1 and coin 2 have the same sides up, B be the event that coin 2 and coin 3 have the same sides up, C be the event that coin 1 and coin 3 have the same sides up.\\
+Then $P(A)=P(B)=P(C)=\frac{1}{2},P(A\cap B)=P(B\cap C)=P(A\cap C)=\frac{1}{4}=P(A)P(B)=P(B)P(C)=P(A)P(C)$\\
+However, $P(A\cap B\cap C)=\frac{1}{4}\neq P(A)P(B)P(C)$
+\end{problem}
+
+\begin{problem}{2(b)}\hfill\linebreak
+Let $P(d)=\frac{1}{8},\forall d\in\{1,2,3,...,8\}$\\
+Let $A=\{1,2,3,4\}, B=\{1,2,5,6\}, C=\{1,3,7,8\}$\\
+So $P(A)=P(B)=P(C)=\frac{1}{2}$\\
+$P(A\cap B)=\frac{1}{4}=P(A)P(B), P(A\cap C)=\frac{1}{4}=P(A)P(C), P(A\cap B\cap C)=\frac{1}{8}=P(A)P(B)P(C)$\\
+$P(B\cap C)=\frac{1}{8}\neq P(B)P(C)$
+\end{problem}
+
+\begin{problem}{3}\hfill\linebreak
+Benford's Law states that $P(d)=log_{10}(1+\frac{1}{d}), d\in\{1,2,...,9\}$\\
+1. $\forall d\in\{1,2,...,9\}, 0<log_{10}(1+\frac{1}{d})<1$\\
+2. $\sum_{d=1}^9 P(d)=\sum_{d=1}^9 log_{10} (1+\frac{1}{d})=log_{10}\Pi_{d=1}^9(\frac{d+1}{d})=log_{10}10=1$\\
+We can also impose finite additivity, so Benford's Law is a well-defined discrete probability distribution.
+\end{problem}
+
+\begin{problem}{4(a)}\hfill\linebreak
+$P(\text{tail appears for the first time at the nth flip})=(\frac{1}{2})^n$\\
+So $E[X]=\sum_{n=1}^\infty (\frac{1}{2})^n 2^n=\sum_{n=1}^\infty 1=\infty$
+\end{problem}
+
+\begin{problem}{4(b)}\hfill\linebreak
+$E[\text{ln}X]=\sum_{n=1}^\infty (\frac{1}{2})^n \text{ln}(2^n)=\text{ln}2\sum_{n=1}^\infty n(\frac{1}{2})^n$\\
+$\sum_{n=1}^\infty n(\frac{1}{2})^n=\frac{1/2}{(1-1/2)^2}=2$, so $E[2\text{ln}X]=$2ln2
+\end{problem}
+
+\begin{problem}{5}\hfill\linebreak
+Suppose the interest rate is x/unit currency in both countries, for a specified period of time.\\
+Suppose the US investor invests one unit in USD, she is expected to get (1+x) USD after this period of time.\\
+Suppose the US investor invests one unit in CHF, she is expected to get $(1+x)\times 1.25\times 0.5+(1+x)\times \frac{1}{1.25}\times 0.5=1.025(1+x)$ USD after this period of time.\\
+So the US investor should invest in CHF. The reasoning is the same for the Swiss investor, so she should invest in USD.
+\end{problem}
+
+\begin{problem}{6(a)}\hfill\linebreak
+Let $X$ be a random variable such that $P(X=x)=\frac{3}{2x^{\frac{5}{2}}}, \forall x\geq 1, P(X=x)=0, \forall x<1$.
+$E[X]=\int_1^\infty xP(x)=3<\infty$\\
+$E[X^2]=\int_1^\infty x^2P(x)=\infty$
+\end{problem}
+
+\begin{problem}{6(b)}\hfill\linebreak
+Let $X$ be a standard normal variable. Let $Y$ be a random variable such that $P(Y=X-\frac{1}{3})=\frac{2}{3}, P(Y=X+1)=\frac{1}{3}$.\\
+Then $P(X>Y)=\frac{2}{3}$, and $E[X]=0, E[Y]=\frac{2}{3}\times (E[X]-\frac{1}{3})+\frac{1}{3}\times (E[X]+1)>0$
+\end{problem}
+
+\begin{problem}{6(c)}\hfill\linebreak
+Let $X$ be a random variable such that $P(X=1)=\frac{1}{2}, P(X=-1)=\frac{1}{2}$\\
+Let $Y$ be a random variable such that $P(Y=\frac{1}{2})=\frac{1}{2}, P(X=-\frac{1}{2})=\frac{1}{2}$\\
+Let $Z$ be the random variable such that $P(Z=0)=1$\\
+Then $P(X>Y)>0, P(Y>Z)>0, P(X>Z)>0$, So $P(X>Y)P(Y>Z)P(X>Z)>0$, and $E[X]=E[Y]=E[Z]=0$.
+\end{problem}
+
+\begin{problem}{7(a)}\hfill\linebreak
+The statement is true.
+The cumulative distribution function of $Y$ is\\ $\Phi(y)=P(XZ<y)=P(XZ<y|Z=1)P(Z=1)+P(XZ<y|Z=-1)P(Z=-1)=\frac{1}{2}P(X<y)+\frac{1}{2}P(-X<y)=\frac{1}{2}P(X<y)+\frac{1}{2}P(X>-y)=P(X<y)=\Phi(x)$, since the Normal Distribution is symmetric.\\
+So $Y$ and $X$ are the same distribution $\Rightarrow Y\sim N(0,1)$
+\end{problem}
+
+\begin{problem}{7(b)}\hfill\linebreak
+The statement is true.\\
+$Y=XZ\Rightarrow |Y|=|XZ|=|X||Z|=|X|$, since $Z$ is either $1$ or $-1$.\\
+$P(|X|=|Y|)=1$
+\end{problem}
+
+\begin{problem}{7(c)}\hfill\linebreak
+The statement is true.\\
+For example, $P(Y=1|X=1)=\frac{1}{2}\neq P(Y=1)$,
+\end{problem}
+
+\begin{problem}{7(d)}\hfill\linebreak
+The statement is true.\\
+$Cov[X,Y]=E[XY]-E[X]E[Y]=E[XY]=E[X^2Z]$\\
+Since $X,Z$ are independent, $E[X^2Z]=E[X^2]E[Z] (*)$\\
+Since $E[Z]=\frac{1}{2}(1+(-1))=0, (*)=0$
+\end{problem}
+
+\begin{problem}{7(e)}\hfill\linebreak
+The statement is false. \\
+As seen in previous parts, $X,Y$ are both normally distributed variables and their covariance is equal to zero. However, they are dependent.
+\end{problem}
+
+\begin{problem}{8}\hfill\linebreak
+We know $m\in [0,1], M\in [0,1]$, so for $x\in [0,1]$
+$P(m<x)=1-P(m\geq x)=1-P(X_1\geq x,X_2\geq x,...X_n\geq x)=1-\Pi_1^nP(X_i\geq x)$, since the variables are independent.\\
+Since $P(X_i\geq x)=1-x$, $P(m<x)=1-(1-x)^n$\\
+\\
+$P(M<x)=P(X_1<x,X_2<x,...X_n<x)=\Pi_1^nP(X_i<x)$, since the variables are independent.\\
+Since $P(X_i<x)=x$, $P(M<x)=x^n$\\
+\\
+$P(m=x)=n(1-x)^{n-1}$\\
+$P(M=x)=nx^{n-1}$\\
+$E[m]=\int_0^1 xn(1-x)^{n-1}dx=\frac{1}{n+1}$\\
+$E[M]=\int_0^1 xnx^{n-1}dx=\frac{n}{n+1}$
+\end{problem}
+
+\begin{problem}{9(a)}\hfill\linebreak
+Denote the number of good states by $X$, then
+$E[X]=1000\times \frac{1}{2}=500, Var[X]=1000\times \frac{1}{2}\times \frac{1}{2}=250$\\
+By Chebyshev Inequality and Central Limit Theorem, $\frac{X-500}{5\sqrt{10}}\sim$ N(0,1)\\
+So $P(X\text{ differs from 500 by at most }2\%)=1-2P(X>510)$\\
+$Z=\frac{510-500}{5\sqrt{10}}=0.6324$\\
+$\Rightarrow P(X\text{ differs from 500 by at most }2\%)=1-2\times 0.2636=1-0.9681=0.4728$
+\end{problem}
+
+\begin{problem}{9(b)}\hfill\linebreak
+Let $Y$ be the proportion of good states. By Central Limit Theorem, $Y\sim N(\frac{1}{2},\frac{1}{4n})$. By Chebyshev's inequality, $P(|Y-0.5|\geq 0.5\times 0.01)\leq \frac{1}{(0.005)^24n}$. So $\frac{1}{(0.005)^24n}\leq 0.01$\\
+$\Rightarrow n\geq 1,000,000$
+\end{problem}
+
+\begin{problem}{10}\hfill\linebreak
+Since $e^{\theta X}$ is a differentiable convex function, $E[e^{\theta X}]\geq e^{E[\theta X]}$, by Jensen's Inequality. \\
+$\Rightarrow (e^{E[X]})^\theta=e^{E[\theta X]}\leq 1$\\
+Since $E[X]<0, e^{E[X]}<1$,for the inequality above to hold, $\theta>0$
+\end{problem}
+% --------------------------------------------------------------
+%     You don't have to mess with anything below this line.
+% --------------------------------------------------------------
+
+\end{document}

@@ -1,7 +1,7 @@
 # solutions.py
-"""Volume IB: Testing.
-<Name>
-<Date>
+"""Testing
+Sophia Mo
+06/26/2017
 """
 import math
 
@@ -86,3 +86,17 @@ class ComplexNumber(object):
                                                                 abs(self.imag))
 
 # Problem 5: Write code for the Set game here
+class Table:
+    def __init__(self, name, n = 12):
+        with open('name','r') as myfile:
+            self.table = [int(i) for i in myfile.read().split('\n')
+
+    def findset(self):
+        return all 
+
+class Card:
+    def __init__(self,*att):
+        self.att = att
+
+    def isset(self,card1,card2):
+        return all((v0+v1+v2)%3==0 for (v0,v1,v2) in zip(self.att, card1.att, card2.att))
