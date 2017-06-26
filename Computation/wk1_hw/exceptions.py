@@ -51,10 +51,10 @@ class ContentFilter:
         if case!="upper" and case!="lower":
             raise ValueError("case should be either upper or lower")
         if case == "upper":
-            with open(name,'w') as myfile:
+            with open(name,mode) as myfile:
                 myfile.write(self.contents.upper())
         if case == "lower":
-            with open(name,'w') as myfile:
+            with open(name,mode) as myfile:
                 myfile.write(self.contents.lower())
 
     def reverse(self, name, mode="w", unit="line"):
@@ -63,21 +63,26 @@ class ContentFilter:
         if unit!="line" and unit!="word":
             raise ValueError("unit should be either line or unit")
         if unit == "line":
-            with open(name,'w') as myfile:
-                lines = self.contents.split('\n')
-                lines = lines[::-1]
-                myfile.write(str(lines))
+            lines = self.contents.split('\n')
+            with open(name,mode) as myfile:
+                for i in reversed(lines):
+                    myfile.write(i+'\n')
         if unit == "word":
+            lines = self.contents.split('\n')
             with open(name,'w') as myfile:
-                words = self.contents.split(" ")
-                words = words[::-1]
-                myfile.write(str(words))
+                for i in lines:
+                    words = i.split()
+                    for j in reversed(words):
+                        myfile.write(j+' ')
+                    myfile.write('\n')
 
     def transpose(self, name):
         with open(name, 'w') as myfile:
-            lis = [x.split() for x in self.contents]
-            lis_1 = zip(*lis)
-            myfile.write(str(lis_1))
+            length = len(lines[0].split())
+            for i in range(0,length):
+                rev = [line.split()[x] for line in self.contents]
+                line = " ".join(rev)
+                myfile.write(line + "\n")
 
     def __str__(self):
         return '\n Source file: \t{} \n Total characters: \t{} \n Alphabetic characters: \t{} \n Numerical characters: \t{} \n Whitespace characters: \t{} \n Number of lines: \t{} \n'.format(self.name, len(self.contents), sum(x.isalpha() for x in self.contents), sum(x.isdigit() for x in self.contents), sum(x.isspace() for x in self.contents), sum(1 for line in self.contents))

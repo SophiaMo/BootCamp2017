@@ -104,39 +104,39 @@ def test_complex_str(set_up_complex_nums):
     assert soln.ComplexNumber.__str__(number_3) == "2+9i"
 
 # Problem 4: Write test cases for the Set game.
+def test_iscard():
+    assert soln.iscard("0123")==False
+def test_isset():
+    assert soln.isset("0111" ,"01111","01111")==True
+@pytest.fixture
 def set_up_sets():
-    with open('set1.txt', 'r') as myfile:
-        set1 = [int(i) for i in myfile.read().split('\n')]
-    with open('set2.txt', 'r') as myfile:
-        set2 = [int(i) for i in myfile.read().split('\n')]
-    with open('set3.txt', 'r') as myfile:
-        set3 = [int(i) for i in myfile.read().split('\n')]
-    with open('set4.txt', 'r') as myfile:
-        set4 = [int(i) for i in myfile.read().split('\n')]
-    with open('set5.txt', 'r') as myfile:
-        set5 = [int(i) for i in myfile.read().split('\n')]
+    set1 = "set1.txt"
+    set2 = "set2.txt"
+    set3 = "set3.txt"
+    set4 = "set4.txt"
+    set5 = "wrongfile.txt"
     return set1, set2, set3, set4, set5
 
 def test_set(set_up_sets):
     set1, set2, set3, set4, set5 = set_up_sets
-    assert soln.set(set1) == 6
+    assert soln.count_sets(set1) == 6
 
     with pytest.raises(Exception) as excinfo:
-        soln.set(set2)
+        soln.count_sets(set2)
     assert excinfo.typename == 'ValueError'
     assert excinfo.value.args[0] == "Should have 12 cards"
 
     with pytest.raises(Exception) as excinfo:
-        soln.set(set3)
+        soln.count_sets(set3)
     assert excinfo.typename == 'ValueError'
     assert excinfo.value.args[0] == "Should not have duplicate cards"
 
     with pytest.raises(Exception) as excinfo:
-        soln.set(set4)
+        soln.count_sets(set4)
     assert excinfo.typename == 'ValueError'
     assert excinfo.value.args[0] == "Input is invalid"
 
     with pytest.raises(Exception) as excinfo:
-        soln.set(set5)
+        soln.count_sets(set5)
     assert excinfo.typename == 'ValueError'
-    assert excinfo.value.args[0] == "Wrong file name"
+    assert excinfo.value.args[0] == "File does not exist"
