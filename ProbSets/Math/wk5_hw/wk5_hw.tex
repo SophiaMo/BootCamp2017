@@ -1,0 +1,167 @@
+\documentclass[letterpaper,12pt]{article}
+\usepackage{array}
+\usepackage{threeparttable}
+\usepackage{geometry}
+\usepackage{mathrsfs}
+\geometry{letterpaper,tmargin=1in,bmargin=1in,lmargin=1.25in,rmargin=1.25in}
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+\lhead{}
+\chead{}
+\rhead{}
+\lfoot{}
+\cfoot{}
+\rfoot{\footnotesize\textsl{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand\headrulewidth{0pt}
+\renewcommand\footrulewidth{0pt}
+\usepackage[format=hang,font=normalsize,labelfont=bf]{caption}
+\usepackage{listings}
+\lstset{frame=single,
+  language=Python,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{harvard}
+\usepackage{setspace}
+\usepackage{float,color}
+\usepackage[pdftex]{graphicx}
+\usepackage{hyperref}
+\hypersetup{colorlinks,linkcolor=red,urlcolor=blue}
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{derivation}{Derivation} % Number derivations on their own
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}{Proposition} % Number propositions on their own
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+%\numberwithin{equation}{section}
+\bibliographystyle{aer}
+\newcommand\ve{\varepsilon}
+\newcommand\boldline{\arrayrulewidth{1pt}\hline}
+
+
+\begin{document}
+
+\begin{flushleft}
+  \textbf{\large{Problem Set} 5} \\
+  OSM Lab-Math \\
+  Sophia Mo
+\end{flushleft}
+
+\vspace{5mm}
+
+\noindent\textbf{Problem 1 (7.1)} \\
+$\forall x, y \in conv(S)$, $x, y$ can be written as $\sum_{i=1}^n \alpha_ix_i, \sum_{j=1}^m \beta_jy_j$, with each $x_i, y_j\in S, \alpha_i, \beta_j>0$, and $\sum_{1}^n \alpha_i = \sum_{1}^m \beta_j = 1$.\\
+\\
+$\forall \lambda$ that satisfies $0\leq \lambda \leq 1$, $\lambda x + (1-\lambda)y = \lambda \sum_{i=1}^n \alpha_ix_i + (1 - \lambda)\sum_{j=1}^m \beta_jy_j$\\
+Since $\lambda\sum_1^n\alpha_i + (1-\lambda)\sum_1^m\beta_j = 1$, and $x_i, y_j\in S$, by the definition of convex hull, we know $\lambda x + (1-\lambda)y\in conv(S)$. So $conv(S)$ is a convex set.\\
+
+\noindent\textbf{Problem 2 (7.2)} \\
+(i)\\
+Let $V$ be a hyperplane that satisfies $\forall x\in V, <a, x> = b\text{  }(a\in V, a\neq 0, b\in\mathbb{R})$. $\forall x, y\in V, \lambda$ s.t. $0\leq \lambda \leq 1,$\\
+$<a, \lambda x + (1-\lambda y)> = \lambda <a, x> + (1-\lambda)<a, y> = \lambda b +(1-\lambda)b = b$\\
+$\Rightarrow \lambda x+(1-\lambda)y \in V$, $V$ is convex.\\
+\\
+(ii)\\
+Let $H$ be a half space that satisfies $\forall x\in H, <a, x> \leq b\text{  }(a\in H, a\neq 0, b\in\mathbb{R})$. $\forall x, y\in H, \lambda$ s.t. $0\leq \lambda \leq 1,$\\
+$<a, \lambda x + (1-\lambda y)> = \lambda <a, x> + (1-\lambda)<a, y> \leq \lambda b +(1-\lambda)b = b$\\
+$\Rightarrow \lambda x+(1-\lambda)y \in H$, $H$ is convex.\\
+\\
+\noindent\textbf{Problem 3 (7.4)} \\
+(i)
+\begin{align*}
+&||x-p||^2 + ||p-y||^2 +2<x-p, p-y> \\
+= &<x-p, x-p> + <p-y, p-y> + 2<x-p,p-y>\\
+= & (<x-p, x-p>+<x-p, p-y>) + (<p-y, p-y> + <x-p, p-y>)\\
+= &<x-p, x-y> + <x-y, p-y> = <x-y, x-y> = ||x-y||^2
+\end{align*}
+(ii)\\
+Suppose $<x-p, p-y>\geq 0, \forall y\in C$, then\\
+$||x-y||^2 = ||x-p||^2 + ||p-y||^2 + 2<x-p, p-y>\geq ||x-p||^2$\\
+$\Rightarrow ||x-y||\geq ||x-p||$\\
+\\
+(iii)\\
+Since $C$ is convex, $p, y\in C, \lambda \in [0, 1]$, we know $z\in C$.\\
+By (i), 
+\begin{align*}
+||x-z||^2 &= ||x-p||^2 + ||p-z||^2 + 2<x-p, p-z>\\
+&= ||x-p||^2 + 2<x-p, \lambda y+(1-\lambda)p>+||\lambda y+(1-\lambda)p-p||^2\\
+&= ||x-p||^2 + 2\lambda <x-p, p-y>+\lambda^2 ||y-p||^2
+\end{align*}
+(iv)\\
+Let $p$ be the projection of $x$ onto $C$. By (iii), we know\\
+$\frac{||x-z||^2-||x-p||^2}{\lambda} = 2<x-p, p-y>+\lambda||y-p||^2$, if $\lambda \in (0, 1]$\\
+Since $p$ is a projection, by definition, $||x-z||\geq ||x-p||$, so the left hand side of the equation $\geq 0$.\\
+$\Rightarrow <x-p, p-y> \geq -\frac{\lambda||y-p||^2}{2}(\star), \forall \lambda\in (0, 1]$\\
+Suppose that $<x-p, p-y>\geq 0$ does not hold for some $y\in C$, then we know $\exists y_0\in C$ s.t. $<x-p, p-y_0> = a<0$. However, as $\lambda\rightarrow 0$, $-\frac{\lambda||y_0-p||^2}{2}\rightarrow 0$, so $-\frac{\lambda||y_0-p||^2}{2}<a$ must be true for some values of $\lambda$. This contradicts the fact that $(\star)$ holds true for all $\lambda \in (0,1]$.  \\
+$\Rightarrow <x-p, p-y>\geq 0$\\
+\\
+The complete proof:\\
+Suppose $p$ is the projection of $x$ onto $C$, then by (iv), $<x-p, p-y>\geq 0$.\\
+Suppose $<x-p, p-y>\geq 0$, then by (ii), $||x-y||>||x-p||$, so $p$ is a projection of $x$ onto $C$.\\
+\\
+\noindent\textbf{Problem 4 (7.6)} \\
+Denote the set $\{x\in \mathbb{R}^n|f(x)\leq c\}$ by A. $\forall x, y\in A, \lambda\in [0, 1]$, since $f$ is a convex function\\
+$f(\lambda x + (1-\lambda) y)\leq \lambda f(x) + (1-\lambda)f(y) \leq \lambda c + (1-\lambda)c = c$.\\
+$\lambda x + (1-\lambda y)\in A$, so $A$ is convex.\\
+\\
+\noindent\textbf{Problem 5 (7.7)} \\
+$\forall x, y, t\in [0,1],$ since all $f_i$'s are convex\\
+\begin{align*}
+f(tx + (1-t)y) &= \sum_{i=1}^k \lambda_if_i(tx+(1-t)y)\\
+&\leq \sum_{i=1}^k \lambda_i[tf_i(x) + (1-t)f_i(y)]\\
+&= t\sum_{i=1}^k \lambda_i f_i(x)+(1-t)\sum{i=1}^k f_i(y) = tf(x)+(1-t)f(y)
+\end{align*}
+So $f$ is convex.\\
+\\
+\noindent\textbf{Problem 6 (7.13)} \\
+Suppose that $f$ is not constant, then $\exists x,y, x<y$ s.t $f(x) \neq f(y)$\\
+Assume without loss of generality that $f(x) < f(y)$\\
+$\forall z>y$, write $y = \frac{y-x}{z-x}z + \frac{z-y}{z-x}x$. Note that $\frac{y-x}{z-x} + \frac{z-y}{z-x} = 1$. Since $f$ is convex, \\
+$f(y) \leq \frac{y-x}{z-x}f(z) + \frac{z-y}{z-x}f(x)$\\
+$\Rightarrow f(z)\geq \frac{z-x}{y-x}f(y) - \frac{z-y}{y-x}f(x)$\\
+Note that as $z\rightarrow \infty$, the right-hand side of the inequality $\rightarrow \infty$, which contradicts the boundedness assumption.\\
+So $f$ is a constant function.\\
+\\
+\noindent\textbf{Problem 7 (7.20)} \\
+Let $g(x) = f(x)- f(0)$, so $g(0) = 0$. Since $f$ is convex and concave, $g$ is also convex and concave. Moreover, $\forall x, \text{ and }y_1, y_2$ that lie on the line joining $0$ and $x$, we know:\\
+$g(y_1) = g(\lambda_1 x + (1-\lambda_1)\times 0)\leq \lambda_1g(x)$, since $g$ is convex.\\
+$g(y_1) = g(\lambda_1 x + (1-\lambda_1)\times 0)\geq \lambda_1g(x)$, since $g$ is concave.\\
+$\Rightarrow g(y_1) = \lambda_1g(x)$. Similarly, $g(y_2) = \lambda_2g(x)$\\
+\\
+$\forall a, b\in \mathbb{R}, g(ay_1+by_2) = (a\lambda_1+b\lambda_2)g(x)=a\lambda_1g(x)+b\lambda_2g(x)=a(g(y_1))+b(g(y_2))$\\
+Since $x$ can be any point in the domain of $f$, we know hat g is a linear transformation on its whole domain.\\
+$\Rightarrow g$ is affine.\\
+Since $f$ is a translation of $g$, $f$ is affine. \\
+\\
+\noindent\textbf{Problem 8 (7.21)}\\
+Suppose that $x^*$ is a local minimizer for the second problem. $\forall x\neq x^*$ in a neighborhood of $x^*$ that satisfies the constraint, we know $f(x)\geq f(x^*)$. Since $\phi$ is strictly increasing, $\phi\circ f(x)\geq \phi\circ f(x^*)$. So $x^*$ is a local minimizer for the first problem.\\
+\\
+Suppose that $x^*$ is a local minimizer for the first problem and that it is not a local minimizer for the second problem. Then in an neighborhood of $x^*$, $\exists x\neq x^*, f(x)<f(x^*) $, and $\phi\circ f(x) > \phi\circ f(x^*)$. Since $\phi$ is strictly increasing, the aforementioned statement is impossible. So this is a contradiction. So $x^*$ is also a local minimizer for the second problem.
+
+\end{document}
+
