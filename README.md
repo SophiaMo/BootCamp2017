@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Assignment files for all weeks could now be found in the folder "ProbSets."
 =======
 # Open Source Macroeconomics Laboratory (OSM Lab) Boot Camp 2017
