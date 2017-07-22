@@ -314,4 +314,3 @@ Although we will be using Python for most of the Boot Camp, we will use C++ for 
 * Lutz, Mark, *Learning Python*, 5th edition, O'Reilly Media, Inc. (2013)
 * McKinney, Wes, *Python for Data Analysis*, O'Reilly Media, Inc. (2013)
 
->>>>>>> upstream/master
