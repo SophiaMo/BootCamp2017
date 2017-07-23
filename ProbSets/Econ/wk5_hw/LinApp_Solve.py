@@ -1,9 +1,9 @@
 """
 MATLAB version 1.1 written by Kerk Phillips, April 2014
 
-PYTHON version adapted by Yulong Li, November 2015 
+PYTHON version adapted by Yulong Li, November 2015
 
-This PYTHON version was also based on the previous adaptations of 
+This PYTHON version was also based on the previous adaptations of
 Uhlig's Toolkit (1999) by Spencer Lyon in May 2012 and later Chase Coleman
 
 """
@@ -33,7 +33,7 @@ def _nullSpaceBasis(A):
     If A is an empty matrix, an empty matrix is returned.
 
     """
-    if A:
+    if A.any():
         U, s, Vh = la.svd(A)
         vecs = np.array([])
         toAppend = A.shape[1] - s.size
@@ -50,7 +50,7 @@ def _nullSpaceBasis(A):
 def qzswitch(i, A, B, Q, Z):
     '''
     Takes U.T. matrices A, B, orthonormal matrices Q,Z, interchanges
-    diagonal elements i and i+1 of both A and B, while maintaining 
+    diagonal elements i and i+1 of both A and B, while maintaining
     Q'AZ' and Q'BZ' unchanged.  Does nothing if ratios of diagonal elements
     in A and B at i and i+1 are the same.  Aborts if diagonal elements of
     both A and B are zero at either position.
@@ -89,15 +89,15 @@ def qzswitch(i, A, B, Q, Z):
     e = B[i-1,i]
     c = A[i,i]
     f = B[i,i]
-  
+
     wz = hstack((dot(c,e)-dot(f,b), (dot(c,d)-dot(f,a)).conj().T))
     xy = hstack(((dot(b,d)-dot(e,a)).conj().T, (dot(c,d)-dot(f,a)).conj().T))
 
     n = np.sqrt(dot(wz,wz.conj().T))
     m = np.sqrt(dot(xy,xy.conj().T))
-    
+
     if n == 0:
-        print "qzswitch(): Inputs unchanged!"
+        print ("qzswitch(): Inputs unchanged!")
         return A, B, Q, Z
     else:
        wz = wz/n
@@ -115,9 +115,9 @@ def qzswitch(i, A, B, Q, Z):
 def qzdiv(stake, A, B, Q, Z):
     '''
     Takes U.T. matrices A, B, orthonormal matrices Q,Z, rearranges them
-    so that all cases of abs(B(i,i)/A(i,i))>stake are in lower right 
+    so that all cases of abs(B(i,i)/A(i,i))>stake are in lower right
     corner, while preserving U.T. and orthonormal properties and Q'AZ' and Q'BZ'.
-    
+
     Parameters
     ----------
     stake : number, dtype=float
@@ -149,16 +149,16 @@ def qzdiv(stake, A, B, Q, Z):
     tmp = (root[:,0]<1.e-13).astype(int)
     root[:,0] = root[:,0]- tmp *(root[:,0]+root[:,1])
     root[:,1] = root[:,1]/root[:,0]
-    for i in xrange(n,0,-1):
+    for i in range(n,0,-1):
         m=0
-        for j in xrange(i,0,-1):
+        for j in range(i,0,-1):
             if (root[j-1,1] > stake or root[j-1,1] < -.1):
                 m=j
                 break
         if m==0:
-            print "qzdiv(): Inputs unchanged!"
+            print ("qzdiv(): Inputs unchanged!")
             return A, B, Q, Z
-        for k in xrange(m,i,1):
+        for k in range(m,i,1):
             A, B, Q, Z = qzswitch(k,A,B,Q,Z)
             tmp = root[k-1,1]
             root[k-1,1] = root[k,1]
@@ -233,10 +233,10 @@ def LinApp_Solve(AA,BB,CC,DD,FF,GG,HH,JJ,KK,LL,MM,WWW,TT,NN,Z0,Sylv):
     NN : array_like, dtype=float, shape=(nz, nz)
         The autocorrelation matrix for the exogenous state vector z.
     Z0 : array, dtype=float, shape=(nz,)
-        the Z-point about which the linearization is taken.  For linearizing 
+        the Z-point about which the linearization is taken.  For linearizing
         about the steady state this is Zbar and normally Zbar = 0.
         QQ if true.
-    Sylv: binary, dtype=int 
+    Sylv: binary, dtype=int
         an indicator variable telling the program to use the built-in
         function sylvester() to solve for QQ and SS, if possible.  Default is
         to use Sylv=1.
@@ -383,7 +383,7 @@ def LinApp_Solve(AA,BB,CC,DD,FF,GG,HH,JJ,KK,LL,MM,WWW,TT,NN,Z0,Sylv):
             stake = max(abs(Xi_sortval[Xi_select])) + TOL
 
             Delta_up, Xi_up, UUU, VVV = qzdiv(stake,Delta_up,Xi_up,UUU,VVV)
-                    
+
             #Check conditions from line 49-109
             if np.imag(Xi_sortval[nx - 1]).any():
                 if (abs(Xi_sortval[nx - 1] - sp.conj(Xi_sortval[nx])) < TOL):
@@ -400,7 +400,7 @@ def LinApp_Solve(AA,BB,CC,DD,FF,GG,HH,JJ,KK,LL,MM,WWW,TT,NN,Z0,Sylv):
                 else:
                     print("Dropping the lowest real eigenvalue. Beware of" +
                           " sunspots!")
-                    for i in xrange(drop_index,nx+1):
+                    for i in range(drop_index,nx+1):
                         Delta_up,Xi_up,UUU,VVV = qzswitch(i,Delta_up,Xi_up,UUU,VVV)
                     Xi_select1 = np.arange(0,drop_index-1)
                     Xi_select = np.append(Xi_select1, np.arange(drop_index,nx+1))
@@ -415,20 +415,20 @@ def LinApp_Solve(AA,BB,CC,DD,FF,GG,HH,JJ,KK,LL,MM,WWW,TT,NN,Z0,Sylv):
                           " state we are having problems with convergence.")
             #End of checking conditions
             #Lambda_mat = np.diag(Xi_sortval[Xi_select]) # to help sol_out.m
-            
+
             VVV=VVV.conj().T
             VVV_2_1 = VVV[nx : 2*nx, 0 : nx]
             VVV_2_2 = VVV[nx : 2*nx, nx :2*nx]
             UUU_2_1 = UUU[nx : 2*nx, 0 : nx]
             VVV = VVV.conj().T
-            
+
             if abs(la.det(UUU_2_1))< TOL:
                 print("One necessary condition for computing P is NOT satisfied,"+
                     " but we proceed anyways...")
             if abs(la.det(VVV_2_1))< TOL:
                 print("VVV_2_1 matrix, used to compute for P, is not invertible; we"+
                     " are in trouble but we proceed anyways...")
-            
+
             PP = np.matrix( la.solve(- VVV_2_1, VVV_2_2) )
             PP_imag = np.imag(PP)
             PP = np.real(PP)
@@ -452,7 +452,7 @@ def LinApp_Solve(AA,BB,CC,DD,FF,GG,HH,JJ,KK,LL,MM,WWW,TT,NN,Z0,Sylv):
     if l_equ == 0:
         RR = zeros((0, nx))
         VV = hstack((kron(NN.T, FF) + kron(eye(nz), \
-            (dot(FF, PP) + GG)), kron(NN.T, JJ) + kron(eye(nz), KK))) 
+            (dot(FF, PP) + GG)), kron(NN.T, JJ) + kron(eye(nz), KK)))
 
     else:
         RR = - dot(CC_plus, (dot(AA, PP) + BB))
@@ -496,7 +496,7 @@ def LinApp_Solve(AA,BB,CC,DD,FF,GG,HH,JJ,KK,LL,MM,WWW,TT,NN,Z0,Sylv):
         if (npla.matrix_rank(VV) < nz * (nx + ny)):
             print("Sorry but V is not invertible. Can't solve for Q and S;"+
                      " but we proceed anyways...")
-        
+
         LL = sp.mat(LL)
         NN = sp.mat(NN)
         LLNN_plus_MM = dot(LL, NN) + MM
