@@ -14,7 +14,7 @@ dot_prod.exec : dot_prod.cpp
 
 ## Exercise 3
 parallel_pi.exec : parallel_pi.cpp
-	g++ parallel_pi.cpp -fopenmp -o parallel_pi.exec
+        g++ -std=c++0x parallel_pi.cpp -fopenmp -o parallel_pi.exec
 
 clean :
 	rm -f *.exec

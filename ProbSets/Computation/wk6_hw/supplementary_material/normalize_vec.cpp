@@ -10,8 +10,6 @@ double norm(double *v, int n){
 
     for(int i=0; i<n; i++)
         norm += v[i]*v[i];
-
-    return sqrt(norm);
 }
 
 // initialise v to values between -10 and 10
@@ -38,7 +36,6 @@ void normalize_vector_omp(double *v, int n)
 
 {
     double norm = 0.;
-    #pragma omp parallel
     // compute the norm of v
     
     {
@@ -51,7 +48,7 @@ void normalize_vector_omp(double *v, int n)
 
     // normalize v
     {
-      #pragma omp for
+      #pragma omp parallel  for
       for(int i=0; i<n; i++){
         v[i] /= norm;
       }
